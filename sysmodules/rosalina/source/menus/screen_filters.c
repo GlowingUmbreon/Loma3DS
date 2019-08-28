@@ -90,7 +90,7 @@ void applyColorSettings(color_setting_t* cs)
 
 Menu screenFiltersMenu = {
     "Screen filters menu",
-    .nbItems = 6,
+    .nbItems = 12,
     {
         { "Disable", METHOD, .method = &screenFiltersSetDisabled },
         { "Reduce blue light (level 1)", METHOD, .method = &screenFiltersReduceBlueLevel1 },
@@ -98,8 +98,84 @@ Menu screenFiltersMenu = {
         { "Reduce blue light (level 3)", METHOD, .method = &screenFiltersReduceBlueLevel3 },
         { "Reduce blue light (level 4)", METHOD, .method = &screenFiltersReduceBlueLevel4 },
         { "Reduce blue light (level 5)", METHOD, .method = &screenFiltersReduceBlueLevel5 },
+        { "Screen off", METHOD, .method = &screenOff },
+        { "Buggy colours (Temp0)", METHOD, .method = &screenFiltersReduceBlueLevel6 },
+        { "Buggy colours (Bright2)", METHOD, .method = &screenFiltersBright2 },
+        { "Buggy colours (Bright10)", METHOD, .method = &screenFiltersBright10 },
+        { "Buggy colours (Bright100)", METHOD, .method = &screenFiltersBright100 },
+        { "*TEST*", METHOD, .method = &screenFiltersTest },
     }
 };
+
+void screenFiltersTest(void)
+{
+    color_setting_t cs;
+    memset(&cs, 0, sizeof(cs));
+
+    cs.temperature = TEMP_DEFAULT;
+    cs.gamma[0] = 1.0F;
+    cs.gamma[1] = 0.0F;
+    cs.gamma[2] = 0.0F;
+    cs.brightness = 1.0F;
+
+    applyColorSettings(&cs);
+}
+
+void screenFiltersBright100(void)
+{
+    color_setting_t cs;
+    memset(&cs, 0, sizeof(cs));
+
+    cs.temperature = TEMP_DEFAULT;
+    cs.gamma[0] = 1.0F;
+    cs.gamma[1] = 1.0F;
+    cs.gamma[2] = 1.0F;
+    cs.brightness = 100.0F;
+
+    applyColorSettings(&cs);
+}
+
+void screenFiltersBright10(void)
+{
+    color_setting_t cs;
+    memset(&cs, 0, sizeof(cs));
+
+    cs.temperature = TEMP_DEFAULT;
+    cs.gamma[0] = 1.0F;
+    cs.gamma[1] = 1.0F;
+    cs.gamma[2] = 1.0F;
+    cs.brightness = 10.0F;
+
+    applyColorSettings(&cs);
+}
+
+void screenFiltersBright2(void)
+{
+    color_setting_t cs;
+    memset(&cs, 0, sizeof(cs));
+
+    cs.temperature = TEMP_DEFAULT;
+    cs.gamma[0] = 1.0F;
+    cs.gamma[1] = 1.0F;
+    cs.gamma[2] = 1.0F;
+    cs.brightness = 2.0F;
+
+    applyColorSettings(&cs);
+}
+
+void screenOff(void)
+{
+    color_setting_t cs;
+    memset(&cs, 0, sizeof(cs));
+
+    cs.temperature = TEMP_DEFAULT;
+    cs.gamma[0] = 1.0F;
+    cs.gamma[1] = 1.0F;
+    cs.gamma[2] = 1.0F;
+    cs.brightness = 0.0F;
+
+    applyColorSettings(&cs);
+}
 
 void screenFiltersSetDisabled(void)
 {
@@ -134,6 +210,12 @@ void screenFiltersReduceBlueLevel4(void)
 void screenFiltersReduceBlueLevel5(void)
 {
     screenFiltersCurrentTemperature = 1000;
+    screenFiltersSetTemperature(screenFiltersCurrentTemperature);
+}
+
+void screenFiltersReduceBlueLevel6(void)
+{
+    screenFiltersCurrentTemperature = 0;
     screenFiltersSetTemperature(screenFiltersCurrentTemperature);
 }
 
