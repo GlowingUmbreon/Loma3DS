@@ -3,12 +3,13 @@
 
 ## What it is
 
-**Loma3DS** is a **Luma3DS** fork with a few small extra features.
+**Loma3DS** is a **Luma3DS** fork with a few small extra features:
 Most Luma3DS text changed to Loma3DS (apart from credits)
 The blue colours you see in menus etc. changed to red
 Files are saved into a directory called Loma insead of Luma
 
-If you are going to use **Loma3DS** then i reccomend putting the boot.firm file into sd:/luma/payloads and run Loma by holding the start button at boot, If you have other files in sd:/luma/payloads then you would need to select the boot option once the Luma3DS chainloader menu pops up
+If you are going to use **Loma3DS** then i using this feature from the **Luma3DS** wiki: 
+https://github.com/AuroraWright/Luma3DS/wiki/Optional-features#firm-payload-chainloader
 
 ---
 
