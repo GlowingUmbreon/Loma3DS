@@ -205,7 +205,7 @@ static Result ERRF_SaveErrorToFile(ERRF_FatalErrInfo *info)
     isSdMode = (bool)out;
 
     archiveId = isSdMode ? ARCHIVE_SDMC : ARCHIVE_NAND_RW;
-    res = IFile_Open(&file, archiveId, fsMakePath(PATH_EMPTY, ""), fsMakePath(PATH_ASCII, "/luma/errdisp.txt"), FS_OPEN_WRITE | FS_OPEN_CREATE);
+    res = IFile_Open(&file, archiveId, fsMakePath(PATH_EMPTY, ""), fsMakePath(PATH_ASCII, "/loma/errdisp.txt"), FS_OPEN_WRITE | FS_OPEN_CREATE);
 
     if(R_FAILED(res))
         return res;

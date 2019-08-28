@@ -181,7 +181,7 @@ void detectAndProcessExceptionDumps(void)
     if(fileWrite((void *)dumpHeader, path, dumpHeader->totalSize))
     {
         posY = drawString(true, 10, posY + SPACING_Y, COLOR_WHITE, "You can find the dump in the following file:");
-        posY = drawFormattedString(true, 10, posY + SPACING_Y, COLOR_WHITE, "%s:/luma/%s", isSdMode ? "SD" : "CTRNAND", path) + SPACING_Y;
+        posY = drawFormattedString(true, 10, posY + SPACING_Y, COLOR_WHITE, "%s:/loma/%s", isSdMode ? "SD" : "CTRNAND", path) + SPACING_Y;
     }
     else posY = drawString(true, 10, posY + SPACING_Y, COLOR_RED, "Error writing the dump file");
 

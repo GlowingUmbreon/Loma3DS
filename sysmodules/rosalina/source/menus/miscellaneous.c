@@ -195,7 +195,7 @@ void MiscellaneousMenu_SaveSettings(void)
     configData.rosalinaMenuCombo = menuCombo;
 
     FS_ArchiveID archiveId = isSdMode ? ARCHIVE_SDMC : ARCHIVE_NAND_RW;
-    res = IFile_Open(&file, archiveId, fsMakePath(PATH_EMPTY, ""), fsMakePath(PATH_ASCII, "/luma/config.bin"), FS_OPEN_CREATE | FS_OPEN_WRITE);
+    res = IFile_Open(&file, archiveId, fsMakePath(PATH_EMPTY, ""), fsMakePath(PATH_ASCII, "/loma/config.bin"), FS_OPEN_CREATE | FS_OPEN_WRITE);
 
     if(R_SUCCEEDED(res))
         res = IFile_Write(&file, &total, &configData, sizeof(configData), 0);

@@ -191,7 +191,7 @@ u32 loadNintendoFirm(FirmwareType *firmType, FirmwareSource nandType, bool loadF
     if(!ISN3DS && *firmType == NATIVE_FIRM && firm->section[0].address == (u8 *)0x1FF80000)
     {
         //We can't boot < 3.x EmuNANDs
-        if(nandType != FIRMWARE_SYSNAND) error("An old unsupported EmuNAND has been detected.\nLuma3DS is unable to boot it.");
+        if(nandType != FIRMWARE_SYSNAND) error("An old unsupported EmuNAND has been detected.\nLoma3DS is unable to boot it.");
 
         if(isSafeMode) error("SAFE_MODE is not supported on 1.x/2.x FIRM.");
 
@@ -248,8 +248,8 @@ void loadHomebrewFirm(u32 pressed)
 
     char absPath[24 + 255];
 
-    if(isSdMode) sprintf(absPath, "sdmc:/luma/%s", path);
-    else sprintf(absPath, "nand:/rw/luma/%s", path);
+    if(isSdMode) sprintf(absPath, "sdmc:/loma/%s", path);
+    else sprintf(absPath, "nand:/rw/loma/%s", path);
 
     char *argv[2] = {absPath, (char *)fbs};
 

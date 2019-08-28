@@ -186,7 +186,7 @@ u32 installK11Extension(u8 *pos, u32 size, bool needToInitSd, u32 baseK11VA, u32
     }
 
     struct CfwInfo *info = &p->info;
-    memcpy(&info->magic, "LUMA", 4);
+    memcpy(&info->magic, "LOMA", 4);
     info->commitHash = COMMIT_HASH;
     info->configFormatVersionMajor = configData.formatVersionMajor;
     info->configFormatVersionMinor = configData.formatVersionMinor;
