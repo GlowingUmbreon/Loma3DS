@@ -4,9 +4,11 @@
 ## What it is
 
 **Loma3DS** is a **Luma3DS** fork with a few small extra features:
-Most Luma3DS text changed to Loma3DS (apart from credits)
-The blue colours you see in menus etc. changed to red
-Files are saved into a directory called Loma insead of Luma
+* Most Luma3DS text changed to Loma3DS (apart from credits)
+* The blue colours you see in menus etc. changed to red
+* Files are saved into a directory called Loma insead of Luma
+* More screen filters
+* Advanced brightness
 
 If you are going to use **Loma3DS** then i using this feature from the **Luma3DS** wiki: 
 https://github.com/AuroraWright/Luma3DS/wiki/Optional-features#firm-payload-chainloader
