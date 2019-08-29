@@ -32,6 +32,7 @@
 
 extern Menu rosalinaMenu;
 
+void RosalinaMenu_Brightness(void);
 void RosalinaMenu_TakeScreenshot(void);
 void RosalinaMenu_ShowCredits(void);
 void RosalinaMenu_ProcessList(void);

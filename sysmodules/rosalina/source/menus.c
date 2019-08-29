@@ -42,7 +42,7 @@
 
 Menu rosalinaMenu = {
     "Rosalina menu",
-    .nbItems = 11,
+    .nbItems = 12,
     {
         { "New 3DS menu...", MENU, .menu = &N3DSMenu },
         { "Cheats...", METHOD, .method = &RosalinaMenu_Cheats },
@@ -51,12 +51,76 @@ Menu rosalinaMenu = {
         { "Debugger options...", MENU, .menu = &debuggerMenu },
         { "System configuration...", MENU, .menu = &sysconfigMenu },
         { "Screen filters...", MENU, .menu = &screenFiltersMenu },
+        { "Screen brightness", METHOD, .method = &RosalinaMenu_Brightness },
         { "Miscellaneous options...", MENU, .menu = &miscellaneousMenu },
         { "Power off", METHOD, .method = &RosalinaMenu_PowerOff },
         { "Reboot", METHOD, .method = &RosalinaMenu_Reboot },
         { "Credits", METHOD, .method = &RosalinaMenu_ShowCredits }
     }
 };
+
+void RosalinaMenu_Brightness(void)
+{
+    Draw_Lock();
+    Draw_ClearFramebuffer();
+    Draw_FlushFramebuffer();
+    Draw_Unlock();
+
+    u32 curBrightness = 48;
+    u32 curScreen = 1;
+    //struct screens {
+    //    enum Both GSPLCD_SCREEN_BOTH;
+    //};
+    //{.name="Top",.val=GSPLCD_SCREEN_TOP},
+    //{.name="Bottom",.val=GSPLCD_SCREEN_BOTTOM}
+    //screens.insert();
+    u32 getScreen(void) 
+    {
+        if (curScreen==1) {
+            return GSPLCD_SCREEN_BOTH;
+        }else if (curScreen==2) {
+            return GSPLCD_SCREEN_TOP;
+        }else if (curScreen==3) {
+            return GSPLCD_SCREEN_BOTTOM;
+        }else{
+            return GSPLCD_SCREEN_BOTH;//Avoid crashes
+        }
+    }
+        
+    do
+    {
+        Draw_Lock();
+        Draw_DrawString(10, 10, COLOR_TITLE, "Bricghtness changer [BETA]");
+        Draw_DrawFormattedString(10, 30, COLOR_WHITE, "Brightness: %02hhu ",curBrightness);
+        Draw_DrawFormattedString(10, 50, COLOR_WHITE, "Screen: %02hhu\n1: Both 2:Top 3:Bottom", curScreen);
+        Draw_DrawString(10, 90, COLOR_WHITE, "Controls:\nUp: Brightness up\nDown: Brightness down\nRight: Change screen\nA: Save(BUGGY! DONT SPAM!)\nB: Exit without saving");
+        Draw_FlushFramebuffer();
+        Draw_Unlock();
+
+        u32 pressed = waitInputWithTimeout(1000);
+
+        if(pressed & BUTTON_UP) {
+            curBrightness++;
+        } else if(pressed & BUTTON_DOWN){
+            curBrightness--; 
+        } else if(pressed & BUTTON_RIGHT) {
+            curScreen++;
+            if (curScreen >3) {
+                curScreen = 1;
+            }
+        } else if(pressed & BUTTON_A){
+            svcKernelSetState(0x10000, 1);
+            if (R_SUCCEEDED(gspLcdInit()))
+	        {
+                GSPLCD_SetBrightnessRaw(/* screens[curScreen].name*/ /*GSPLCD_SCREEN_BOTH*/getScreen(),curBrightness);
+                gspLcdExit();
+            }
+            svcKernelSetState(0x10000, 1);
+        } else if(pressed & BUTTON_B)
+            return;
+    }
+    while(!terminationRequest);
+}
 
 void RosalinaMenu_ShowCredits(void)
 {

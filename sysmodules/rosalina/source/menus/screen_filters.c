@@ -109,16 +109,15 @@ Menu screenFiltersMenu = {
 
 void screenFiltersTest(void)
 {
-    color_setting_t cs;
-    memset(&cs, 0, sizeof(cs));
-
-    cs.temperature = TEMP_DEFAULT;
-    cs.gamma[0] = 1.0F;
-    cs.gamma[1] = 0.0F;
-    cs.gamma[2] = 0.0F;
-    cs.brightness = 1.0F;
-
-    applyColorSettings(&cs);
+    svcKernelSetState(0x10000, 1);
+    if (R_SUCCEEDED(gspLcdInit()))
+    {
+        GSPLCD_PowerOffAllBacklights();
+        //GSPLCD_SetBrightness(GSPLCD_SCREEN_BOTH, 1);
+	    //GSPLCD_SetBrightnessRaw(GSPLCD_SCREEN_TOP, 128);
+        gspLcdExit();
+    }
+    svcKernelSetState(0x10000, 1);
 }
 
 void screenFiltersBright100(void)
