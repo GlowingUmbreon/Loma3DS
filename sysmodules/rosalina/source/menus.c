@@ -66,15 +66,10 @@ void RosalinaMenu_Brightness(void)
     Draw_FlushFramebuffer();
     Draw_Unlock();
 
-    u32 curBrightness = 48;
+    u32 curBrightness = 100;
     u32 curScreen = 1;
-    //struct screens {
-    //    enum Both GSPLCD_SCREEN_BOTH;
-    //};
-    //{.name="Top",.val=GSPLCD_SCREEN_TOP},
-    //{.name="Bottom",.val=GSPLCD_SCREEN_BOTTOM}
-    //screens.insert();
-    u32 getScreen(void) 
+
+    u32 getScreen(void)//I dont know how tables/arrays work 
     {
         if (curScreen==1) {
             return GSPLCD_SCREEN_BOTH;
@@ -90,10 +85,11 @@ void RosalinaMenu_Brightness(void)
     do
     {
         Draw_Lock();
-        Draw_DrawString(10, 10, COLOR_TITLE, "Bricghtness changer [BETA]");
+        Draw_DrawString(10, 10, COLOR_TITLE, "Brightness changer [BETA]");
         Draw_DrawFormattedString(10, 30, COLOR_WHITE, "Brightness: %02hhu ",curBrightness);
-        Draw_DrawFormattedString(10, 50, COLOR_WHITE, "Screen: %02hhu\n1: Both 2:Top 3:Bottom", curScreen);
-        Draw_DrawString(10, 90, COLOR_WHITE, "Controls:\nUp: Brightness up\nDown: Brightness down\nRight: Change screen\nA: Save(BUGGY! DONT SPAM!)\nB: Exit without saving");
+        Draw_DrawFormattedString(10, 40, COLOR_WHITE, "Screen: %02hhu\n1: Both 2:Top 3:Bottom", curScreen);
+        Draw_DrawString(10, 70, COLOR_WHITE, "Controls:\nUp: Brightness up\nDown: Brightness down\nRight: Change screen\nA: Save and exit (Buggy)\nB: Exit without saving");
+        Draw_DrawString(10, SCREEN_BOT_HEIGHT - 30, COLOR_RED, "[Warning]: Brightness above default limit may\nreduce the lifespan of your device's screen");
         Draw_FlushFramebuffer();
         Draw_Unlock();
 
@@ -112,10 +108,11 @@ void RosalinaMenu_Brightness(void)
             svcKernelSetState(0x10000, 1);
             if (R_SUCCEEDED(gspLcdInit()))
 	        {
-                GSPLCD_SetBrightnessRaw(/* screens[curScreen].name*/ /*GSPLCD_SCREEN_BOTH*/getScreen(),curBrightness);
+                GSPLCD_SetBrightnessRaw(getScreen(),curBrightness);
                 gspLcdExit();
             }
             svcKernelSetState(0x10000, 1);
+            return;
         } else if(pressed & BUTTON_B)
             return;
     }
