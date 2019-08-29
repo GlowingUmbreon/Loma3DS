@@ -37,7 +37,8 @@ Menu N3DSMenu = {
     .nbItems = 2,
     {
         { "Enable L2 cache", METHOD, .method = &N3DSMenu_EnableDisableL2Cache },
-        { clkRateBuf, METHOD, .method = &N3DSMenu_ChangeClockRate }
+        { clkRateBuf, METHOD, .method = &N3DSMenu_ChangeClockRate },
+        { "Record screen", METHOD, .method = &N3DSMenu_Record }
     }
 };
 
@@ -71,4 +72,9 @@ void N3DSMenu_EnableDisableL2Cache(void)
     svcKernelSetState(10, (u32)newBitMask);
 
     N3DSMenu_UpdateStatus();
+}
+
+void N3DSMenu_Record(void)
+{
+    //Comming soon
 }
