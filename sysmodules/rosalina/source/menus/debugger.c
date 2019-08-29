@@ -107,7 +107,7 @@ void DebuggerMenu_EnableDebugger(void)
         if(alreadyEnabled)
             Draw_DrawString(10, 30, COLOR_WHITE, "Already enabled!");
         else if(!isSocURegistered)
-            Draw_DrawString(10, 30, COLOR_WHITE, "Can't start the debugger before the system has fi-\nnished loading.");
+            Draw_DrawString(10, 30, COLOR_WHITE, "Can't start the debugger before the system has\nfinished loading.");
         else
         {
             Draw_DrawString(10, 30, COLOR_WHITE, "Starting debugger...");

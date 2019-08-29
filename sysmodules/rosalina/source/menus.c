@@ -87,7 +87,7 @@ void RosalinaMenu_Brightness(void)
         Draw_Lock();
         Draw_DrawString(10, 10, COLOR_TITLE, "Brightness changer [BETA]");
         Draw_DrawFormattedString(10, 30, COLOR_WHITE, "Brightness: %02hhu ",curBrightness);
-        Draw_DrawFormattedString(10, 40, COLOR_WHITE, "Screen: %02hhu\n1: Both 2:Top 3:Bottom", curScreen);
+        Draw_DrawFormattedString(10, 40, COLOR_WHITE, "Screen: %02hhu\n1:Both 2:Top 3:Bottom", curScreen);
         Draw_DrawString(10, 70, COLOR_WHITE, "Controls:\nUp: Brightness up\nDown: Brightness down\nRight: Change screen\nA: Save and exit (Buggy)\nB: Exit without saving");
         Draw_DrawString(10, SCREEN_BOT_HEIGHT - 30, COLOR_RED, "[Warning]: Brightness above default limit may\nreduce the lifespan of your device's screen");
         Draw_FlushFramebuffer();

@@ -266,7 +266,7 @@ void configMenu(bool oldPinStatus, u32 oldPinMode)
     drawFormattedString(false, 10, SCREEN_HEIGHT - 2 * SPACING_Y, COLOR_YELLOW, "Booted from %s via %s", isSdMode ? "SD" : "CTRNAND", bootTypes[(u32)bootType]);
 
     //Character to display a selected option
-    char selected = 'x';
+    char selected = 'X';
 
     u32 endPos = 10 + 2 * SPACING_Y;
 
