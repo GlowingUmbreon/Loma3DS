@@ -1,3 +1,5 @@
+# DISCONTINUED, DO NOT USE.
+
 # Loma3DS
 *"Luma3DS but got modified by someone"*
 
